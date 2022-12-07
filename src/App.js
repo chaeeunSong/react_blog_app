@@ -7,6 +7,7 @@ function App() {
     let post = 'MY BLOG';
     let [title, titleChange] = useState(['옷 추천', '맛집 추천', '핫플레이스 추천']);
     let [like, likePlus] = useState(0);
+    let [modal, setModal] = useState(false);
     
   return (
     <div className="App">
@@ -30,11 +31,29 @@ function App() {
             <p>2월 17일 발행</p>
         </div>
         <div className="list">
-            <h4>{ title[2] }</h4>
+            <h4 onClick={()=>{setModal(!modal)}}>{ title[2] }</h4>
             <p>2월 17일 발행</p>
         </div>
+
+        {
+            modal == true ? <Modal/> : null
+        }
+
     </div>
   );
 }
+
+// Modal component
+function Modal(){
+    return (
+        <div className="modal">
+            <h4>제목</h4>
+            <p>날짜</p>
+            <p>상세내용</p>
+        </div>
+    )
+}
+
+
 
 export default App;
