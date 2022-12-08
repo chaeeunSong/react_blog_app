@@ -6,38 +6,45 @@ function App() {
 
     let post = 'MY BLOG';
     let [title, titleChange] = useState(['옷 추천', '맛집 추천', '핫플레이스 추천']);
-    let [like, likePlus] = useState(0);
     let [modal, setModal] = useState(false);
-    
+    let [like, likePlus] = useState( [0,0,0])
+
   return (
     <div className="App">
         <div className="black-nav">
             <h4>{post}</h4>
         </div>
 
-        <button className="btn1" onClick={()=> {
+        <div className="sort-box"><button className="btn1" onClick={()=> {
             let copy = [...title]
             copy = copy.sort()
             titleChange(copy)
-        }}>오름차순정렬</button>
+        }}>오름차순정렬</button></div>
 
 
-        <div className="list">
-            <h4>{ title[0] } <span className="like_icon" onClick={()=> {likePlus(like+1)}}>❤</span> {like}</h4>
-            <p>2월 17일 발행</p>
-        </div>
-        <div className="list">
-            <h4>{ title[1] }</h4>
-            <p>2월 17일 발행</p>
-        </div>
-        <div className="list">
-            <h4 onClick={()=>{setModal(!modal)}}>{ title[2] }</h4>
-            <p>2월 17일 발행</p>
-        </div>
+        {
+            title.map(function(a, i){
+                return (
+                    <div className="list" key={i}>
+                        <h4 onClick={()=>{setModal(!modal)}}>{ title[i] }</h4>
+                        <div className="like_icon" onClick={()=>{
+                            let likeCopy = [...like];
+                            likeCopy[i] = likeCopy[i] + 1;
+                            likePlus(likeCopy)
+                        }}>👍 {like[i]}</div>
+                        <p>2월 17일 발행</p>
+                    </div>
+                )
+            })
+        }
+
+
 
         {
             modal == true ? <Modal/> : null
         }
+
+
 
     </div>
   );

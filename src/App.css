@@ -57,15 +57,22 @@ div{
 
 .like_icon{
   cursor:pointer;
+  float:right;
+  width:50px;
+  font-weight:bold;
 }
+
+.sort-box{width:100%; overflow:hidden;}
 
 .btn1{
   margin-top:20px;
+  margin-right:10px;
   width:100px;
   line-height:30px;
   border:0;
   background:#000000;
   color:#fff;
+  float:right;
 }
 
 .modal{
