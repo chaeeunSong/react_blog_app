@@ -9,6 +9,7 @@ function App() {
     let [modal, setModal] = useState(false);
     let [like, likePlus] = useState( [0,0,0]);
     let [modalTitle, setModalTitle] = useState(0);
+    let [input, inputChange] = useState('');
 
   return (
     <div className="App">
@@ -34,10 +35,30 @@ function App() {
                             likePlus(likeCopy)
                         }}>👍 {like[i]}</div>
                         <p>2월 17일 발행</p>
+                        <button className="delete_btn" onClick={()=>{
+                            let copy = [...title];
+                            copy.splice(i,1);
+                            titleChange(copy);
+                        }}>삭제</button>
                     </div>
                 )
             })
         }
+
+        <div className="write_wrap">
+            <input onChange={(e)=>{
+                inputChange(e.target.value);
+                console.log(input)
+            }} />
+
+            <button onClick={()=>{
+                let copy = [...title];
+                copy.unshift(input)
+                titleChange(copy)
+            }}>글쓰기</button>
+        </div>
+
+
 
         {
             modal == true ? <Modal modalTitle={modalTitle} title={modalTitle} color='#eee' titleChange={titleChange} title={title}/> : null
