@@ -7,7 +7,8 @@ function App() {
     let post = 'MY BLOG';
     let [title, titleChange] = useState(['옷 추천', '맛집 추천', '핫플레이스 추천']);
     let [modal, setModal] = useState(false);
-    let [like, likePlus] = useState( [0,0,0])
+    let [like, likePlus] = useState( [0,0,0]);
+    let [modalTitle, setModalTitle] = useState(0);
 
   return (
     <div className="App">
@@ -26,7 +27,7 @@ function App() {
             title.map(function(a, i){
                 return (
                     <div className="list" key={i}>
-                        <h4 onClick={()=>{setModal(!modal)}}>{ title[i] }</h4>
+                        <h4 onClick={()=>{setModal(!modal); setModalTitle(i) }}>{ title[i] }</h4>
                         <div className="like_icon" onClick={()=>{
                             let likeCopy = [...like];
                             likeCopy[i] = likeCopy[i] + 1;
@@ -38,23 +39,20 @@ function App() {
             })
         }
 
-
-
         {
-            modal == true ? <Modal/> : null
+            modal == true ? <Modal modalTitle={modalTitle} title={modalTitle} color='#eee' titleChange={titleChange} title={title}/> : null
         }
-
-
 
     </div>
   );
 }
 
+
 // Modal component
-function Modal(){
+function Modal(props){
     return (
-        <div className="modal">
-            <h4>제목</h4>
+        <div className="modal" style={{background: props.color}}>
+            <h4>제목: { props.title[props.modalTitle] }</h4>
             <p>날짜</p>
             <p>상세내용</p>
         </div>
